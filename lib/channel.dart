@@ -43,8 +43,7 @@ void _subscribe(String type, void handler(Socket socket, Map<String, Object> det
 }
 
 void _send(String type, String data) {
-  CustomEvent event = document.$dom_createEvent('CustomEvent');
-  event.initCustomEvent(type, false, false, data);
+  CustomEvent event = new CustomEvent(type, false, false, data);
   window.on[type].dispatch(event);
 }
 
