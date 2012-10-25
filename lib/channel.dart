@@ -15,6 +15,7 @@
 #library('channel_api');
 
 #import('dart:html');
+#import('dart:json');
 
 final String _openChannel = '_open_channel';
 final String _closeChannel = '_close_channel';
@@ -33,7 +34,7 @@ Map<String, Socket> _sockets;
  */
 void _subscribe(String type, void handler(Socket socket, Map<String, Object> detail)) {
   window.on[type].add((CustomEvent e) {
-    Map<String, Object> detail = e.detail;
+    Map<String, Object> detail = JSON.parse(e.detail);
     String token = detail['token'];
     Socket socket = _sockets[token];
     if ((socket != null) && (socket.onMessage != null)) {
