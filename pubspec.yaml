@@ -1,4 +1,4 @@
-name:  gae-channel-api-dart
+name:  appengine_channel
 description: A Dart wrapper for the Google App Engine Channel API.
 version: 0.1.0
 author: Justin Fagnani <justinfagnani@google.com>

@@ -1,5 +1,5 @@
 import 'dart:html';
-import 'package:gae-channel-api-dart/channel.dart';
+import 'package:appengine_channel/channel.dart';
 import 'package:unittest/unittest.dart';
 import 'package:js/js.dart' as js;
 
