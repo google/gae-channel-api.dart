@@ -1,6 +1,8 @@
 name:  gae-channel-api-dart
-description:  Dart version of the Google App Engine Channel API
-
+description: A Dart wrapper for the Google App Engine Channel API.
+version: 0.1.0
+author: Justin Fagnani <justinfagnani@google.com>
+homepage: http://code.google.com/p/gae-channel-api-dart/
 dependencies:
   unittest:
     sdk: unittest
