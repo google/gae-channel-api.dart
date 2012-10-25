@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#library('channel_api');
+library channel_api;
 
-#import('dart:html');
-#import('dart:json');
+import 'dart:html';
+import 'dart:json';
 
-final String _openChannel = '_open_channel';
-final String _closeChannel = '_close_channel';
-final String _channelOpen = '_channel_open';
-final String _channelClose = '_channel_close';
-final String _channelMessage = '_channel_message';
-final String _channelError = '_channel_error';
+const String _openChannel = '_open_channel';
+const String _closeChannel = '_close_channel';
+const String _channelOpen = '_channel_open';
+const String _channelClose = '_channel_close';
+const String _channelMessage = '_channel_message';
+const String _channelError = '_channel_error';
 
 // Map token->Socket for all open Sockets
 Map<String, Socket> _sockets;
