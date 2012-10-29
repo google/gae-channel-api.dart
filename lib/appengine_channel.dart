@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-library channel;
+library appengine_channel;
 
 import 'dart:html';
 import 'dart:json';
