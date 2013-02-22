@@ -15,7 +15,7 @@
 library appengine_channel;
 
 import 'dart:html';
-import 'dart:json';
+import 'dart:json' as json;
 
 const String _openChannel = '_open_channel';
 const String _closeChannel = '_close_channel';
@@ -32,20 +32,22 @@ Map<String, Socket> _sockets;
  * The event's detail field is a Map with a 'token' field which is used to
  * lookup the correct Socket to pass to the handler.
  */
-void _subscribe(String type, void handler(Socket socket, Map<String, Object> detail)) {
-  window.on[type].add((CustomEvent e) {
-    Map<String, Object> detail = JSON.parse(e.detail);
+void _subscribe(String type,
+    void handler(Socket socket, Map<String, Object> detail)) {
+  window.on[type].listen((CustomEvent e) {
+    Map<String, Object> detail = json.parse(e.detail);
     String token = detail['token'];
     Socket socket = _sockets[token];
     if ((socket != null) && (socket.onMessage != null)) {
       handler(socket, detail);
     }
-  }, false);
+  });
 }
 
 void _send(String type, String data) {
-  CustomEvent event = new CustomEvent(type, false, false, data);
-  window.on[type].dispatch(event);
+  CustomEvent event = new CustomEvent(type, canBubble: false, cancelable: false,
+      detail: data);
+  window.dispatchEvent(event);
 }
 
 _setup() {
@@ -88,13 +90,13 @@ class Channel {
   }
 }
 
-/// Callback for onOpen and onClose.
+/** Callback for onOpen and onClose. */
 typedef void Handler();
 
-/// Callback for onMessage.
+/** Callback for onMessage. */
 typedef void MessageHandler(String message);
 
-/// Callback for onError
+/** Callback for onError */
 typedef void ErrorHandler(String code, String description);
 
 
