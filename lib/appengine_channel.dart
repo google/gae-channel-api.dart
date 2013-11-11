@@ -15,7 +15,7 @@
 library appengine_channel;
 
 import 'dart:html';
-import 'dart:json' as json;
+import 'dart:convert' show JSON;
 
 const String _openChannel = '_open_channel';
 const String _closeChannel = '_close_channel';
@@ -35,7 +35,7 @@ Map<String, Socket> _sockets;
 void _subscribe(String type,
     void handler(Socket socket, Map<String, Object> detail)) {
   window.on[type].listen((CustomEvent e) {
-    Map<String, Object> detail = json.parse(e.detail);
+    Map<String, Object> detail = JSON.decode(e.detail);
     String token = detail['token'];
     Socket socket = _sockets[token];
     if ((socket != null) && (socket.onMessage != null)) {
