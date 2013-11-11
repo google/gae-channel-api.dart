@@ -1,0 +1,40 @@
+gae-channel-api-dart
+
+A port of the App Engine Channel API JavaScript client.
+
+How To Use
+----------
+
+You will need to include the following script tag to load the JavaScript client: 
+ 
+<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+
+And this script tag to load the JavaScript adapter:
+
+<script type="text/javascript" src="/channel-dart.js"></script>
+
+Adjust the path to match where you serve the file from.
+
+In your Dart code, import the channel library:
+
+#import('packages:channel/channel.dart');
+
+Once you retrieve a token from your app, usually during the initial page load,
+or in a HttpRequest, you can create a Channel instance, and from that a Socket
+that you can register onOpen, onClose, onMessage, and onError handlers on.
+
+openChannel(String token) {
+  Channel channel = new Channel(token);
+  Socket socket = channel.open()
+    ..onOpen = (() => print("open"))
+    ..onClose = (() => print("close"))
+    ..onMessage = ((m) => print("message: $m"))
+    ..onError = ((code, desc) => print("error: $code $desc"));
+}
+
+The Dart port follows the JavaScript API fairly closely and so it doesn't use
+Futures. If the Dart teams figures out how to use Futures elegantly in dart:io
+it'll be worth adopting that here.
+
+This code has only had limited testing on the latest Chrome. Please report any
+errors you find in the issue tracker.
